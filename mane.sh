@@ -21,7 +21,7 @@ HGNC_data_original=$(awk '/^HGNC_data_original=/ {print $2}' $CONFIG_FILE)
 HGNC_data=$(awk '/^HGNC_data=/ {print $2}' $CONFIG_FILE)
 hgTables=$(awk '/^hgTables=/ {print $2}' $CONFIG_FILE)
 hgTables_exon=$(awk '/^hgTables_exon=/ {print $2}' $CONFIG_FILE)
-
+LRG_RefSeqGene=$(awk '/^LRG_RefSeqGene=/ {print $2}' $CONFIG_FILE)
 
 echo "Prep start!"
 
@@ -49,7 +49,9 @@ cat $hgTables_exon | awk 'BEGIN{OFS="\t"}{print $1, $2, $3, $4}' | awk -F "_" 'B
 #3:Alias symbols
 #4:Chromosome
 #5:MANE Select RefSeq transcript ID
-cat $HGNC_data_original | awk -F "\t" 'BEGIN{OFS="\t"}{print $2,$4,$6,$7,$12}' > $HGNC_data
+#cat $HGNC_data_original | awk -F "\t" 'BEGIN{OFS="\t"}{print $2,$4,$6,$7,$12}' > $HGNC_data
+#save all the information for the troubleshooting.
+cat $HGNC_data_original > $HGNC_data
 
 echo "Done!"
 
